@@ -46,7 +46,7 @@ public class ItemController {
         return "index";
     }
 
-    @RequestMapping("/add")
+    //@RequestMapping("/add")
 
 
     /*
