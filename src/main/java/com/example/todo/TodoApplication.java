@@ -19,7 +19,6 @@ public class TodoApplication {
     public TodoApplication(ArrayList<Item> todoList){
         this.todoList = todoList;
     }
-
     public ArrayList<Item> getTodoList(){
         return todoList;
     }

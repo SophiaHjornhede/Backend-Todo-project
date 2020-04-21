@@ -47,6 +47,21 @@ public class ItemController {
     }
 
     @RequestMapping("/add")
+    public String addTodo(@ModelAttribute Item requestItem) {
+        Item item = new Item(requestItem.getTodos());
+        ItemRepository.save(item);
+        return "redirect:/";
+    }
+
+    @RequestMapping("/update")
+    public String updateTodo(@ModelAttribute TodoApplication requestItems){
+        for (Item.requestItem : requestItems.getTodoList() ) {
+            Item item = new Item(requestItem.getTodos());
+            item.setCondition(requestItem.isCondition);
+            item.setId(requestItem.getID());
+            itemRepository.save(item);
+        }
+    }
 
 
     /*

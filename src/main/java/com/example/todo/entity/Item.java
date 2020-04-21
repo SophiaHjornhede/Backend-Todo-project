@@ -14,7 +14,10 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String todos;
-    private String condition;
+    private boolean condition;
+
+    public Item(String todos) {
+    }
 
     public Integer getId() {
         return id;
@@ -32,15 +35,15 @@ public class Item {
         this.todos = todos;
     }
 
-    public String getCondition() {
+    public boolean isCondition() {
         return condition;
     }
 
-    public void setCondition(String condition) {
+    public void setCondition(boolean condition) {
         this.condition = condition;
     }
 
-   /*
+ /*
 
     @Override
     public String toString() {
