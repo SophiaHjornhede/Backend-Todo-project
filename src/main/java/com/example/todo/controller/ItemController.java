@@ -55,7 +55,7 @@ public class ItemController {
 
     @RequestMapping("/update")
     public String updateTodo(@ModelAttribute TodoApplication requestItems){
-        for (Item.requestItem : requestItems.getTodoList() ) {
+        for (Item.requestItem : requestItems.getTodoList()) {
             Item item = new Item(requestItem.getTodos());
             item.setCondition(requestItem.isCondition);
             item.setId(requestItem.getID());
