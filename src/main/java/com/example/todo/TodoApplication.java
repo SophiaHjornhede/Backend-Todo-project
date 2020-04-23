@@ -3,6 +3,7 @@ package com.example.todo;
 //import org.springframework.boot.SpringApplication;
 //import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.example.todo.entity.Item;
+import org.springframework.boot.SpringApplication;
 
 import java.util.ArrayList;
 import javax.validation.Valid;
@@ -26,10 +27,10 @@ public class TodoApplication {
     public void setTodoList(ArrayList<Item> todoList){
         this.todoList = todoList;
     }
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         SpringApplication.run(TodoApplication.class, args);
     }
 
-     */
+
 
 }

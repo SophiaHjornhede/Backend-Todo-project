@@ -18,6 +18,9 @@ public class Item {
 
     public Item(String todos) {
     }
+    public Item (){
+
+    }
 
     public Integer getId() {
         return id;
