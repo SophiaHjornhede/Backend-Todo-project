@@ -8,5 +8,7 @@ import com.example.todo.controller.ItemController;
 //import org.springframework.stereotype.Repository;
 
 //@Repository
-public interface ItemRepository extends CrudRepository<Item,Integer>{
+public interface ItemRepository extends CrudRepository<Item,Long>{
+    Iterable<Item> findByCondition(boolean condition);
+    int countByCondition(boolean condition);
 }
