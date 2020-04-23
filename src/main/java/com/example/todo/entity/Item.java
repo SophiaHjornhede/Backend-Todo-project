@@ -10,9 +10,17 @@ import javax.persistence.Id;
 
 @Entity
 public class Item {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     private String todos;
     private boolean condition;
 
@@ -20,14 +28,6 @@ public class Item {
     }
     public Item (){
 
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getTodos() {
