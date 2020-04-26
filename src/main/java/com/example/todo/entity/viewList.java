@@ -2,12 +2,12 @@ package com.example.todo.entity;
 
 import java.util.ArrayList;
 
-public class List {
+public class viewList {
     private ArrayList<Item> todoList = new ArrayList<>();
 
-    public List(){}
+    public viewList(){}
 
-    public List(ArrayList<Item> todoList) {this.todoList = todoList;}
+    public viewList(ArrayList<Item> todoList) {this.todoList = todoList;}
 
     public ArrayList<Item> getTodoList() {return todoList;}
 

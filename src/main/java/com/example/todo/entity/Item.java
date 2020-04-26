@@ -1,10 +1,7 @@
 package com.example.todo.entity;
 
-//import com.example.todo.controller.ItemController;
-//import com.example.todo.repository.ItemRepository;
-
-import java.util.Objects;
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "db_todo")
@@ -15,7 +12,7 @@ public class Item {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "todos", nullable = false, length = 255)
+     @Column(name = "todos", nullable = false, length = 255)
     private String todos;
 
     @Column(name = "condition", nullable = false)
