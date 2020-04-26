@@ -31,18 +31,18 @@ public class ItemController {
         return M;
     }
 
-    @GetMapping("/getItems")
+    @GetMapping("/getItem")
     public @ResponseBody Optional<Item> getinfo(@RequestParam long id) {
         return itemRepository.findById(id);
     }
 
-    @DeleteMapping("/deleteItems")
+    @DeleteMapping("/deleteItem")
     public String deletePost(@RequestParam long id) {
         itemRepository.deleteById(id);
         return "deleted";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/addItem")
     public @ResponseBody String addTodoItems(@RequestParam String content) {
         Item todo = new Item(content);
         itemRepository.save(todo);
@@ -56,7 +56,7 @@ public class ItemController {
     }
 
 
-    @GetMapping(path = "/all")
+    @GetMapping(path = "/allItems")
     public @ResponseBody Iterable<Item> getAllTodos() {
         return itemRepository.findAll();
     }
@@ -66,12 +66,12 @@ public class ItemController {
         return itemRepository.count();
     }
 
-    @GetMapping(path = "/active")
+    @GetMapping(path = "/activeItems")
     public @ResponseBody Iterable<Item> getAllActive(Model model) {
         return itemRepository.findByCondition(false);
     }
 
-    @GetMapping(path = "/complete")
+    @GetMapping(path = "/completeItems")
     public @ResponseBody Iterable<Item> getAllComplete(Model model) {
         return itemRepository.findByCondition(true);
     }
@@ -91,7 +91,7 @@ public class ItemController {
         return"Change todo status";
     }
 
-    @GetMapping("/changeAll")
+    @GetMapping("/changeAllstatus")
     public String changeAllTodos() {
         Iterable<Item> elements= itemRepository.findAll();
         Iterable<Item> elementsCompleted= itemRepository.findByCondition(true);
