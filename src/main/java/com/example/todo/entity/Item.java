@@ -3,31 +3,43 @@ package com.example.todo.entity;
 //import com.example.todo.controller.ItemController;
 //import com.example.todo.repository.ItemRepository;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.Objects;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "db_todo")
 public class Item {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    @Column(name = "todos", nullable = false, length = 255)
+    private String todos;
+
+    @Column(name = "condition", nullable = false)
+    private boolean condition;
+
+    public Item() {
+    }
+
+    public Item(String todos) {
+        this.todos = todos;
+        this.condition = false;
+    }
+
+    public Item(String todos, boolean done) {
+        this.todos = todos;
+        this.condition = done;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String todos;
-    private boolean condition;
-
-    public Item(String todos) {
-    }
-    public Item (){
-
     }
 
     public String getTodos() {
@@ -46,15 +58,16 @@ public class Item {
         this.condition = condition;
     }
 
- /*
+    public void setComplete(boolean c){
+        this.condition = c;
+    }
+    public boolean getComplete(){ return condition;}
+
 
     @Override
-    public String toString() {
-        return "Item{" + "id=" + id +
-                "todos=" + todos + '\'' +
-                ", condition=" + condition +
-                '}';
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
-    */
-}
+    }
+

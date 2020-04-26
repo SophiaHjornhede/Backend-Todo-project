@@ -11,7 +11,7 @@ import javax.validation.Valid;
 
 //@SpringBootApplication
 public class TodoApplication {
-
+/*
     @Valid
     private ArrayList<Item> todoList = new ArrayList<Item>();
 
@@ -27,10 +27,12 @@ public class TodoApplication {
     public void setTodoList(ArrayList<Item> todoList){
         this.todoList = todoList;
     }
+
+
+ */
     public static void main(String[] args) {
         SpringApplication.run(TodoApplication.class, args);
     }
-
 
 
 }
