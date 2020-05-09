@@ -1,10 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Project TodoMVC</title>
+
+
 </head>
+
 <body>
+<header>
+    <h1>Todos API</h1>
+
+</header>
+<p>Use Postman to access the api</p>
+<ul>
+    <li>Show all items          http://localhost:8080/api/all</li>
+    <li>Delete items            http://localhost:8080/api/deletepost - (@RequestParam long id)</li>
+    <li>Add items               http://localhost:8080/api/add - (@RequestParam String text)</li>
+    <li>Show total number       http://localhost:8080/api/totalnumber</li>
+    <li>Show active items       http://localhost:8080/api/active</li>
+    <li>Show completed items    http://localhost:8080/api/complete</li>
+    <li>Change one todo         http://localhost:8080/api/changeone - (@RequestParam long id)</li>
+    <li>Toggle all todo status  http://localhost:8080/api/changeall</li>
+    <li>Update an items         http://localhost:8080/api/update2 (@RequestParam long id, @RequestParam String text,
+        @RequestParam boolean completed)</li>
+</ul>
+
 
 </body>
+
 </html>

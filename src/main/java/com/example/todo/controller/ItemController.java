@@ -2,27 +2,24 @@ package com.example.todo.controller;
 
 import com.example.todo.entity.Item;
 import com.example.todo.repository.ItemRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 
 @Controller
-@RequestMapping(path="/todo")
+@RequestMapping("/api")
+
 public class ItemController {
+
     @Autowired
     private ItemRepository itemRepository;
+    private ItemController(ItemRepository itemRepository){this.itemRepository = itemRepository;}
 
     @GetMapping("/welcome")
     public ModelAndView welcome() {
@@ -37,7 +34,7 @@ public class ItemController {
     }
 
     @DeleteMapping("/deleteItem")
-    public String deletePost(@RequestParam long id) {
+    public @ResponseBody String deletePost(@RequestParam long id) {
         itemRepository.deleteById(id);
         return "deleted";
     }
@@ -50,11 +47,10 @@ public class ItemController {
     }
 
     @PostMapping("/")
-    public String createNewItems(Item todo) {
+    public @ResponseBody String createNewItems(Item todo) {
         itemRepository.save(todo);
         return "redirect:/";
     }
-
 
     @GetMapping(path = "/allItems")
     public @ResponseBody Iterable<Item> getAllTodos() {
@@ -77,13 +73,13 @@ public class ItemController {
     }
 
     @RequestMapping("/")
-    public String indexNew(Model model) {
+    public @ResponseBody String indexNew(Model model) {
         return "indexNew";
     }
 
 
     @RequestMapping("/changeOneTodo")
-    public String changeOneTodo(@RequestParam long id) {
+    public @ResponseBody String changeOneTodo(@RequestParam long id) {
         Item todo = itemRepository.findById(id).orElse(null);
         boolean completed = todo.getComplete();
         todo.setComplete(!completed);
@@ -92,7 +88,7 @@ public class ItemController {
     }
 
     @GetMapping("/changeAllstatus")
-    public String changeAllTodos() {
+    public @ResponseBody String changeAllTodos() {
         Iterable<Item> elements= itemRepository.findAll();
         Iterable<Item> elementsCompleted= itemRepository.findByCondition(true);
 
