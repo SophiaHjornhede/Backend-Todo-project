@@ -46,12 +46,6 @@ public class ItemController {
         return "Stored Todo";
     }
 
-    @PostMapping("/")
-    public @ResponseBody String createNewItems(Item todo) {
-        itemRepository.save(todo);
-        return "redirect:/";
-    }
-
     @GetMapping(path = "/allItems")
     public @ResponseBody Iterable<Item> getAllTodos() {
         return itemRepository.findAll();
@@ -71,12 +65,6 @@ public class ItemController {
     public @ResponseBody Iterable<Item> getAllComplete(Model model) {
         return itemRepository.findByCondition(true);
     }
-
-    @RequestMapping("/")
-    public @ResponseBody String indexNew(Model model) {
-        return "indexNew";
-    }
-
 
     @RequestMapping("/changeOneTodo")
     public @ResponseBody String changeOneTodo(@RequestParam long id) {
