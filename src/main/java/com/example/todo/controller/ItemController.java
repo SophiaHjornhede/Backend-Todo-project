@@ -17,9 +17,14 @@ import java.util.stream.StreamSupport;
 
 public class ItemController {
 
-    @Autowired
+
+    // inject constructor
     private ItemRepository itemRepository;
-    private ItemController(ItemRepository itemRepository){this.itemRepository = itemRepository;}
+    @Autowired  // constructor injection
+    private ItemController(ItemRepository itemRepository){
+        this.itemRepository = itemRepository;
+    }
+    
 
     @GetMapping("/welcome")
     public ModelAndView welcome() {
@@ -28,74 +33,118 @@ public class ItemController {
         return M;
     }
 
+    
+    /**
+     * check the repository for a specific id     * 
+     * @param id
+     * @return
+     */
     @GetMapping("/getItem")
-    public @ResponseBody Optional<Item> getinfo(@RequestParam long id) {
+    @ResponseBody
+    public Optional<Item> getinfo(@RequestParam long id) {
         return itemRepository.findById(id);
     }
-
-    @DeleteMapping("/deleteItem")
-    public @ResponseBody String deletePost(@RequestParam long id) {
-        itemRepository.deleteById(id);
-        return "deleted";
+    
+    /**
+     * Total item numbers in the repository 
+     * @return
+     */
+    @GetMapping(path = "/howManyInTotal")
+    @ResponseBody
+    public  long totalNumbers() {
+        return itemRepository.count();
     }
+    
 
+    /**
+     * add one todo item to the repository
+     * @param content
+     * @return
+     */
     @PostMapping("/addItem")
-    public @ResponseBody String addTodoItems(@RequestParam String content) {
+    @ResponseBody
+    public  String addTodoItems(@RequestParam String content) {
         Item todo = new Item(content);
         itemRepository.save(todo);
         return "Stored Todo";
     }
-
-    @GetMapping(path = "/allItems")
-    public @ResponseBody Iterable<Item> getAllTodos() {
-        return itemRepository.findAll();
+    
+    
+    /**
+     * delete an item in the repository
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/deleteItem")
+    @ResponseBody
+    public String deletePost(@RequestParam long id) {
+        itemRepository.deleteById(id);
+        return "deleted";
     }
 
-    @GetMapping(path = "/howManyInTotal")
-    public @ResponseBody long totalNumbers() {
-        return itemRepository.count();
-    }
-
-    @GetMapping(path = "/activeItems")
-    public @ResponseBody Iterable<Item> getAllActive(Model model) {
-        return itemRepository.findByCondition(false);
-    }
-
-    @GetMapping(path = "/completeItems")
-    public @ResponseBody Iterable<Item> getAllComplete(Model model) {
-        return itemRepository.findByCondition(true);
-    }
-
+    /**
+     * Change one items status: completed or active
+     * @param id
+     * @return
+     */
     @RequestMapping("/changeOneTodo")
-    public @ResponseBody String changeOneTodo(@RequestParam long id) {
+    @ResponseBody
+    public  String changeOneTodo(@RequestParam long id) {
         Item todo = itemRepository.findById(id).orElse(null);
-        boolean completed = todo.getComplete();
-        todo.setComplete(!completed);
+        boolean done = todo.getComplete();
+        todo.setComplete(!done);
         itemRepository.save(todo);
         return"Change todo status";
     }
+    
+    
+    /**
+     * show all the items in the repository
+     * @return
+     */
+    @GetMapping(path = "/allItems")
+    @ResponseBody
+    public  Iterable<Item> getAllTodos() {
+        return itemRepository.findAll();
+    }  
+   
+    /**
+     * all the active items of the todos 
+     * @param model
+     * @return
+     */
+    @GetMapping(path = "/activeItems")
+    @ResponseBody
+    public  Iterable<Item> getAllActive(Model model) {
+        return itemRepository.findByCompleted(false);
+    }
 
-    @GetMapping("/changeAllstatus")
-    public @ResponseBody String changeAllTodos() {
-        Iterable<Item> elements= itemRepository.findAll();
-        Iterable<Item> elementsCompleted= itemRepository.findByCondition(true);
+    /**
+     * all the completed items of todos in the repository
+     * @param model
+     * @return
+     */
+    @GetMapping(path ="/completeItems")
+    @ResponseBody
+    public  Iterable<Item> getAllComplete(Model model) {
+        return itemRepository.findByCompleted(true);
+    }
 
-        if(StreamSupport.stream(elements.spliterator(), false).count() == StreamSupport.stream(elementsCompleted.spliterator(), false).count()) {
-            {
-                for(Item element:elements) {
-                    element.setComplete(false);
-                    itemRepository.save(element);
-                }
-            }
-            return "Setting false";
-        }
-        else
-            for(Item element:elements) {
+    
+    /**
+     * Moved Logic to another class called TodoLogic.java
+     * @return
+     * @throws Exception
+     */
+    @SuppressWarnings("null")
+	@GetMapping("/changeall")
+	@ResponseBody
+	public String changeAllconditions() throws Exception {
+		
+		TodoLogic logic = new TodoLogic();
 
-                element.setComplete(true);
-                itemRepository.save(element);
-            }
-            return"Setting true";
-        }
-
-}
+		return logic.extractedRequest(itemRepository);
+	}
+  
+}   
+    

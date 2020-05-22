@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 @Service
 @Repository
 public interface ItemRepository extends CrudRepository<Item,Long>{
-    Iterable<Item> findByCondition(boolean condition);
-    int countByCondition(boolean condition);
+    
+	//find all the items that was completed
+	Iterable<Item> findByCompleted(boolean completed);
+    
+	//how many of the completed items
+	int countByCompleted(boolean completed);
 }

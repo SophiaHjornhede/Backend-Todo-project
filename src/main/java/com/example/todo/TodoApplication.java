@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-// @Configuration
+
 @SpringBootApplication
-@import({ConfigTodo.class})
+
 public class TodoApplication {
 
     public static void main(String[] args) {
