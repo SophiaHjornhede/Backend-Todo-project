@@ -91,8 +91,8 @@ public class ItemController {
     @ResponseBody
     public  String changeOneTodo(@RequestParam long id) {
         Item todo = itemRepository.findById(id).orElse(null);
-        boolean done = todo.getComplete();
-        todo.setComplete(!done);
+        boolean done = todo.isCompleted();
+        todo.setCompleted(!done);
         itemRepository.save(todo);
         return"Change todo status";
     }
@@ -136,7 +136,7 @@ public class ItemController {
      * @return
      * @throws Exception
      */
-    @SuppressWarnings("null")
+    //@SuppressWarnings("null")
 	@GetMapping("/changeall")
 	@ResponseBody
 	public String changeAllconditions() throws Exception {

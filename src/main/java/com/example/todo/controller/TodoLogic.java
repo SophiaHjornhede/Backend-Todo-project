@@ -24,12 +24,12 @@ public class TodoLogic {
 		//Compare the two iterable lists and set same complete status
 		if (todoItems.equals(todoItemsCompleted)) {
 			for (Item todoItem : todoItems) {
-				todoItem.setComplete(false);
+				todoItem.setCompleted(false);
 				repository.save(todoItem);
 			}
 		} else {
 			for (Item todoItem : todoItems) {
-				todoItem.setComplete(true);
+				todoItem.setCompleted(true);
 				repository.save(todoItem);
 			}
 		}

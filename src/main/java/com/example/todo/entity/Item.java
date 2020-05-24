@@ -19,8 +19,8 @@ public class Item {
     private String todos;
 
     //generate todo conditions
-    @Column(name = "condition", nullable = false)
-    private boolean condition;
+    @Column(name = "completed", nullable = false)
+    private boolean completed;
 
     
     public Item() {
@@ -28,12 +28,12 @@ public class Item {
 
     public Item(String todos) {
         this.todos = todos;
-        this.condition = false;
+        this.completed = false;
     }
 
     public Item(String todos, boolean done) {
         this.todos = todos;
-        this.condition = done;
+        this.completed = done;
     }
 
     public Long getId() {
@@ -52,12 +52,12 @@ public class Item {
         this.todos = todos;
     }
 
-    public boolean isCondition() {
-        return condition;
+    public boolean isCompleted() {
+        return completed;
     }
 
-    public void setCondition(boolean condition) {
-        this.condition = condition;
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
  
 
