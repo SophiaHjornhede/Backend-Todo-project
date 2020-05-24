@@ -20,6 +20,7 @@ public class ItemController {
 
     // inject constructor
     private ItemRepository itemRepository;
+	
     @Autowired  // constructor injection
     private ItemController(ItemRepository itemRepository){
         this.itemRepository = itemRepository;
